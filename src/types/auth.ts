@@ -1,18 +1,31 @@
 export type UserRole = 'passenger' | 'driver';
 
+export type DriverDocumentKind =
+  | 'license'
+  | 'vehicleRegistration'
+  | 'taxiRegistry';
+
 export interface LoginPayload {
-  phone: string;
+  login: string;
   password: string;
-  role: UserRole;
 }
 
-export interface RegisterPayload {
+export interface DriverRegisterPayload {
   name: string;
   phone: string;
   email: string;
   password: string;
   confirmPassword: string;
-  role: UserRole;
+  acceptTerms: boolean;
+  driverDocuments: Record<DriverDocumentKind, File>;
+}
+
+export interface PassengerRegisterPayload {
+  name: string;
+  phone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
   acceptTerms: boolean;
 }
 
@@ -23,6 +36,9 @@ export interface AuthResponse {
     name: string;
     phone: string;
     email: string;
-    role: UserRole;
   };
+}
+
+export interface IError {
+  detail: string;
 }

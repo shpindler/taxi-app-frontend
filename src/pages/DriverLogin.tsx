@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../components/AuthLayout';
 import { TextField } from '../components/TextField';
 import { RoleSwitcher } from '../components/RoleSwitcher';
 import { loginSchema, type LoginFormValues } from '../validation/schemas';
-import { authApi } from '../api/auth';
+import { ApiError, authApi } from '../api/auth';
+import styles from './Login.module.css';
 
-export function LoginPage() {
+export function DriverLoginPage() {
   const navigate = useNavigate();
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -19,19 +20,30 @@ export function LoginPage() {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { phone: '', password: '', role: 'passenger' },
+    defaultValues: { login: '', password: '', role: 'passenger' },
   });
 
   const onSubmit = async (values: LoginFormValues) => {
     setServerError(null);
     try {
-      const { token, user } = await authApi.login(values);
+      const { token } = await authApi.driverLogin(values);
       localStorage.setItem('token', token);
-      navigate(user.role === 'driver' ? '/driver' : '/passenger');
+      navigate('/driver');
     } catch (e) {
-      setServerError(e instanceof Error ? e.message : 'Не удалось войти');
+      setServerError(e instanceof Error ? (e as ApiError).data.detail[0] : 'Не удалось войти');
     }
   };
+
+  const role = useWatch({ control, name: 'role' });
+
+  const onRoleChange = ({ onChange, role }) => {
+    onChange(role);
+    if (role == 'driver') {
+      navigate('/driver-login');
+    } else if (role == 'passenger') {
+      navigate('/login');
+    }
+  }
 
   return (
     <AuthLayout title="Вход в аккаунт" subtitle="Рады видеть вас снова">
@@ -40,7 +52,10 @@ export function LoginPage() {
           name="role"
           control={control}
           render={({ field }) => (
-            <RoleSwitcher value={field.value} onChange={field.onChange} />
+            <RoleSwitcher
+              value={field.value}
+              onChange={(role) => onRoleChange({ onChange: field.onChange, role })}
+            />
           )}
         />
 
@@ -49,10 +64,9 @@ export function LoginPage() {
           type="tel"
           placeholder="+7 999 123-45-67"
           autoComplete="tel"
-          error={errors.phone?.message}
-          {...register('phone')}
+          error={errors.login?.message}
+          {...register('login')}
         />
-
         <TextField
           label="Пароль"
           type="password"
@@ -62,14 +76,20 @@ export function LoginPage() {
           {...register('password')}
         />
 
-        {serverError && <p className="form-error">{serverError}</p>}
+        {serverError && <p className={styles.formError}>{serverError}</p>}
 
-        <button type="submit" className="btn btn--primary" disabled={isSubmitting}>
+        <button
+          type="submit"
+          className={`${styles.btn} ${styles.btnPrimary}`}
+          disabled={isSubmitting}
+        >
           {isSubmitting ? 'Вход…' : 'Войти'}
         </button>
 
-        <p className="auth-footer">
-          Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+        <p className={styles.footer}>
+          Нет аккаунта? <Link
+            to={role == 'driver' ? '/driver-register' : '/passenger-register'}
+          >Зарегистрироваться</Link>
         </p>
       </form>
     </AuthLayout>

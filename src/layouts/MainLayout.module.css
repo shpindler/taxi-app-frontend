@@ -1,0 +1,43 @@
+.strip {
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--y) 0 24px,
+      var(--yi) 24px 48px
+    );
+  }
+  
+  .header {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  
+  .logo {
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--ink);
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 14px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .nav a {
+    color: var(--mute);
+    text-decoration: none;
+  }
+  
+  .nav a:hover {
+    color: var(--ink);
+  }

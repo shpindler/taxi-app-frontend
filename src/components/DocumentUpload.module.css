@@ -1,0 +1,140 @@
+.root {
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  
+  .drop {
+    display: block;
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    cursor: pointer;
+    background: #fafafa;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  
+  .drop:hover {
+    border-color: #c4c8ce;
+  }
+  
+  .dragging {
+    border-color: var(--brand-dark);
+    background: #fffbe6;
+  }
+  
+  .hasError {
+    border-color: var(--error);
+    background: #fef2f2;
+  }
+  
+  .hasFile {
+    border-style: solid;
+    background: #fff;
+  }
+  
+  .input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+  }
+  
+  .icon {
+    font-size: 22px;
+  }
+  
+  .title {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  .file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .thumb {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    flex: none;
+  }
+  
+  .thumbPdf {
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #b91c1c;
+    background: #fef2f2;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+  }
+  
+  .name {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .size {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  .clear {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--muted);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  
+  .clear:hover {
+    color: var(--error);
+    background: #fef2f2;
+  }
+  
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  .errorText {
+    font-size: 12px;
+    color: var(--error);
+  }

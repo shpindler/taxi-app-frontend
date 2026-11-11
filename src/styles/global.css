@@ -1,0 +1,53 @@
+:root {
+    --brand: #ffcc00;
+    --brand-dark: #e6b800;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --error: #dc2626;
+    --radius: 12px;
+  
+    /* палитра для compare */
+    --bg: #f2f4ef;
+    --card: #fff;
+    --ink: #16211c;
+    --mute: #5d6b63;
+    --line: #dde3da;
+    --y: #ffc400;
+    --yi: #16211c;
+    --g: #1f7a47;
+    --gbg: #e1f3e8;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --bg: #101613;
+      --card: #19221d;
+      --ink: #eef2ec;
+      --mute: #9aa89f;
+      --line: #2b372f;
+      --gbg: #17352463;
+      --g: #5fd08c;
+    }
+  }
+  
+  :root[data-theme='dark'] {
+    --bg: #101613;
+    --card: #19221d;
+    --ink: #eef2ec;
+    --mute: #9aa89f;
+    --line: #2b372f;
+    --gbg: #17352463;
+    --g: #5fd08c;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px/1.45 Manrope, system-ui, sans-serif;
+  }

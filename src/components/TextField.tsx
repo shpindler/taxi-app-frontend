@@ -1,4 +1,5 @@
 import { forwardRef, type InputHTMLAttributes } from 'react';
+import styles from './TextField.module.css';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -6,20 +7,22 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TextField = forwardRef<HTMLInputElement, Props>(
-  ({ label, error, id, ...rest }, ref) => {
+  ({ label, error, id, className, ...rest }, ref) => {
     const inputId = id ?? rest.name;
     return (
-      <div className="field">
-        <label htmlFor={inputId} className="field__label">
+      <div className={styles.field}>
+        <label htmlFor={inputId} className={styles.label}>
           {label}
         </label>
         <input
           ref={ref}
           id={inputId}
-          className={`field__input ${error ? 'field__input--error' : ''}`}
+          className={[styles.input, error && styles.error, className]
+            .filter(Boolean)
+            .join(' ')}
           {...rest}
         />
-        {error && <span className="field__error">{error}</span>}
+        {error && <span className={styles.errorText}>{error}</span>}
       </div>
     );
   }
