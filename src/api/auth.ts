@@ -4,44 +4,13 @@ import type {
   DriverRegisterPayload,
   PassengerRegisterPayload,
 } from '../types/auth';
+import { ApiError, extractDetail } from './errors';
 
-const API_HOST = import.meta.env.VITE_API_URL;
+export const API_HOST = import.meta.env.VITE_API_URL;
 
 const BASE = `${API_HOST}/api`;
 
-// Тип ошибки с телом ответа сервера
-export class ApiError extends Error {
-  status: number;
-  data: any;
-
-  constructor(message: string, status: number, data: any) {
-    super(message);
-    this.name = 'ApiError';
-    this.status = status;
-    this.data = data;
-  }
-}
-
-// Извлечение читаемого сообщения из тела ответа DRF
-function extractDetail(data: any, fallback: string): string {
-  if (!data) return fallback;
-
-  const detail = data.detail;
-  if (Array.isArray(detail) && detail.length) return String(detail[0]);
-  if (typeof detail === 'string') return detail;
-
-  // DRF: { field: ["..."] } — берём первое поле с ошибкой
-  if (typeof data === 'object') {
-    const firstKey = Object.keys(data)[0];
-    const val = data[firstKey];
-    if (Array.isArray(val) && val.length) return String(val[0]);
-    if (typeof val === 'string') return val;
-  }
-
-  return fallback;
-}
-
-async function requestJson<T>(url: string, body: unknown): Promise<T> {
+export async function requestJson<T>(url: string, body: unknown): Promise<T> {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -57,7 +26,7 @@ async function requestJson<T>(url: string, body: unknown): Promise<T> {
   return res.json();
 }
 
-async function requestForm<T>(url: string, form: FormData): Promise<T> {
+export async function requestForm<T>(url: string, form: FormData): Promise<T> {
   const res = await fetch(url, { method: 'POST', body: form });
 
   if (!res.ok) {

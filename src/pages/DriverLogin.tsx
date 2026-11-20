@@ -6,7 +6,8 @@ import { AuthLayout } from '../components/AuthLayout';
 import { TextField } from '../components/TextField';
 import { RoleSwitcher } from '../components/RoleSwitcher';
 import { loginSchema, type LoginFormValues } from '../validation/schemas';
-import { ApiError, authApi } from '../api/auth';
+import { authApi } from '../api/auth';
+import { ApiError } from '../api/errors';
 import styles from './Login.module.css';
 
 export function DriverLoginPage() {

@@ -1,0 +1,49 @@
+.pickupRow {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  
+  .inputPickup {
+    padding-right: 44px;
+  }
+  
+  .inputActivePickup {
+    border: 2px solid blue;
+  }
+  
+  .inputActiveDestination {
+    border: 2px solid red;
+  }
+  
+  .inputIdle {
+    border: 1px solid #ccc;
+  }
+  
+  .locateBtn {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+  }
+  
+  .locateBtn:disabled {
+    cursor: default;
+  }
+  
+  .locateBtn:not(:disabled) {
+    cursor: pointer;
+  }

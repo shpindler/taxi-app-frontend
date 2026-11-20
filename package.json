@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.2",
+    "@zhilibyli/react-compiler-yandex-maps": "^2.0.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-hook-form": "^7.90.0",
@@ -22,6 +23,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "@yandex/ymaps3-types": "^1.0.22020827",
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.4"

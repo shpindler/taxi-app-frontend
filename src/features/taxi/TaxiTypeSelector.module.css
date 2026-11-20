@@ -1,0 +1,47 @@
+.wrapper {
+    margin-top: 15px;
+  }
+  
+  .label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .option {
+    flex: 1;
+    padding: 10px 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+  }
+  
+  .optionActive {
+    /* border-color и background проставляются инлайном из цвета тарифа */
+    font-weight: 700;
+  }
+  
+  .option:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .optionLabel {
+    font-weight: bold;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .optionDesc {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+  }
